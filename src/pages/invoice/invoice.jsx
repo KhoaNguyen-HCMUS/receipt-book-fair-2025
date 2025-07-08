@@ -22,9 +22,14 @@ const Invoice = () => {
         if (result.success) {
           setReceiptDetails(result.receipt);
           setBooks(result.orders);
-        } else {
+        } else if (result.success === 'false') {
           setError('Không tìm thấy hóa đơn hoặc mã hóa đơn không hợp lệ.');
           setErrorType('not_found');
+          setLoading(false);
+          return;
+        } else {
+          setError('Không tìm thấy hóa đơn hoặc mã hóa đơn không hợp lệ.');
+          setErrorType('server_error');
           setLoading(false);
           return;
         }
