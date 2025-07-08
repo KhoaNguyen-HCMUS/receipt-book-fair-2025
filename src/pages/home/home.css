@@ -1,0 +1,63 @@
+.home-page {
+	margin: 0;
+	padding: 0;
+	font-family: Arial, sans-serif;
+	background: url('/HomePage.png') no-repeat center center;
+	background-size: cover;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	width: 100vw;
+	overflow: hidden;
+	position: relative;
+  }
+  
+.home-page::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background: rgba(0, 0, 0, 0.3);
+	z-index: 0;
+} 
+
+.home-card {
+	z-index: 1;
+	background: rgba(255, 255, 255, 0.9);
+	padding: 2rem;
+	border-radius: 10px;
+	width: 400px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+  
+.home-title {
+	font-size: 1.8rem;
+	font-weight: bold;
+	margin-bottom: 1rem;
+	text-align: center;
+	color: #333;
+}
+
+.home-input {
+	width: 100%;
+	padding: 0.5rem;
+	margin-bottom: 1rem;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	box-sizing: border-box;
+}
+
+.home-button {
+	width: 100%;
+	padding: 0.5rem;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 1rem;
+}
+  
