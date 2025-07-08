@@ -8,7 +8,6 @@ const Invoice = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [receiptDetails, setReceiptDetails] = useState({});
-  const [error, setError] = useState(null);
   const [errorType, setErrorType] = useState(null);
   const navigate = useNavigate();
 
@@ -22,19 +21,16 @@ const Invoice = () => {
         if (result.success) {
           setReceiptDetails(result.receipt);
           setBooks(result.orders);
-        } else if (result.success === 'false') {
-          setError('Không tìm thấy hóa đơn hoặc mã hóa đơn không hợp lệ.');
+        } else if (!result.success) {
           setErrorType('not_found');
           setLoading(false);
           return;
         } else {
-          setError('Không tìm thấy hóa đơn hoặc mã hóa đơn không hợp lệ.');
           setErrorType('server_error');
           setLoading(false);
           return;
         }
       } catch {
-        setError('Không tìm thấy hóa đơn hoặc mã hóa đơn không hợp lệ.');
         setErrorType('server_error');
         setLoading(false);
         return;
@@ -45,10 +41,6 @@ const Invoice = () => {
 
     fetchReceiptDetails();
   }, [id]);
-
-  const handleBack = () => {
-    navigate('/');
-  };
 
   if (errorType === 'not_found') {
     return (
@@ -88,30 +80,12 @@ const Invoice = () => {
     return <LoadingModal />;
   }
 
-  if (error) {
-    return (
-      <div className='min-h-screen bg-gray-50 flex items-center justify-center'>
-        <div className='bg-white p-8 rounded-lg shadow-lg text-center max-w-md'>
-          <div className='text-red-500 text-6xl mb-4'>❌</div>
-          <h2 className='text-2xl font-bold text-gray-800 mb-4'>Lỗi</h2>
-          <p className='text-gray-600 mb-6'>{error}</p>
-          <button
-            onClick={handleBack}
-            className='bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors'
-          >
-            Quay lại trang chủ
-          </button>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className='min-h-screen bg-gray-50 p-6'>
       <div className='max-w-4xl mx-auto'>
         <div className='mb-6'>
           <button
-            className='bg-green-600  cursor-pointer text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors'
+            className='bg-green-600 cursor-pointer text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors'
             onClick={() => navigate(-1)}
           >
             ← Quay lại
@@ -122,7 +96,7 @@ const Invoice = () => {
         {loading ? (
           <p className='text-gray-600'>Đang tải...</p>
         ) : (
-          <div className='bg-white rounded-lg shadow-lg p-6'>
+          <div className='bg-white rounded-lg shadow-lg p-6 max-h-[80vh] overflow-y-auto'>
             <div className='bg-gray-50 p-4 rounded-lg space-y-3'>
               <div className='flex justify-between'>
                 <span className='font-medium text-gray-700'>Tên Thu Ngân:</span>
