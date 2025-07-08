@@ -81,7 +81,7 @@ const Invoice = () => {
         <div className='mb-6'>
           <button
             className='bg-green-600 cursor-pointer text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors'
-            onClick={() => navigate(-1)}
+            onClick={() => navigate('/')}
           >
             ← Quay lại
           </button>
