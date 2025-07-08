@@ -46,7 +46,7 @@ const Invoice = () => {
     return (
       <ErrorModal
         title='Không tìm thấy hóa đơn'
-        message={`Hóa đơn ${id} không tồn tại trong hệ thống. Vui lòng kiểm tra lại mã hóa đơn.`}
+        message={`Hóa đơn ${id} không tồn tại hoặc đã xảy ra lỗi kết nối. Vui lòng kiểm tra lại mã hóa đơn và thử lại sau.`}
         icon='🔍'
       />
     );
@@ -58,10 +58,6 @@ const Invoice = () => {
         title='Lỗi hệ thống'
         message='Đã xảy ra lỗi khi tải dữ liệu. Vui lòng thử lại sau ít phút.'
         icon='⚠️'
-        onButtonClick={() => {
-          setErrorType(null);
-          setLoading(true);
-        }}
       />
     );
   }
@@ -72,7 +68,6 @@ const Invoice = () => {
         title='Lỗi kết nối'
         message='Không thể kết nối đến máy chủ. Vui lòng kiểm tra kết nối mạng.'
         icon='📡'
-        onButtonClick={() => window.location.reload()}
       />
     );
   }
